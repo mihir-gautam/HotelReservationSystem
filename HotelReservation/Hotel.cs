@@ -6,12 +6,10 @@ namespace HotelReservation
 {
     public class Hotel
     {
-		private string hotelName;
-		private int regularRate;
 		public Hotel(String hotelName, int regularRate)
 		{
-			this.hotelName = hotelName;
-			this.regularRate = regularRate;
+			this.HotelName = hotelName;
+			this.RegularRate = regularRate;
 		}
 		public string HotelName { get; set; }
 		public int RegularRate { get; set; }

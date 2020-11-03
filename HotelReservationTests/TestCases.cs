@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HotelReservation;
+using System.Linq;
+using System;
 
 namespace HotelReservation
 {
@@ -19,5 +21,22 @@ namespace HotelReservation
             hotelReservation.AddHotelToSystem(hotelName, rate);
             Assert.AreEqual(1, hotelReservation.availableHotels.Count);
         }
+        /// <summary>
+        /// Test case to check if the method is providing correct output.
+        /// </summary>
+        [TestMethod]
+        public void Given_ValidDate_ShouldReturn_CheapestHotel()
+        {
+            HotelReservation hotelReservation = new HotelReservation();
+            hotelReservation.AddHotelToSystem("Lakewood", 110);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220);
+            Assert.AreEqual("Lakewood",hotelReservation.HotelList.First().HotelName);
+        }
+        /// <summary>
+        /// Test case to give custom exception when given invalid date
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
     }
 }
