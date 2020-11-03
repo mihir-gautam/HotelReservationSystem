@@ -17,8 +17,9 @@ namespace HotelReservation
         {
             HotelReservation hotelReservation = new HotelReservation();
             string hotelName = "Lakewood";
-            int rate = 110;
-            hotelReservation.AddHotelToSystem(hotelName, rate);
+            int weekdayRate = 110;
+            int weekendRate = 90;
+            hotelReservation.AddHotelToSystem(hotelName, weekdayRate,weekendRate);
             Assert.AreEqual(1, hotelReservation.availableHotels.Count);
         }
         /// <summary>
@@ -28,15 +29,10 @@ namespace HotelReservation
         public void Given_ValidDate_ShouldReturn_CheapestHotel()
         {
             HotelReservation hotelReservation = new HotelReservation();
-            hotelReservation.AddHotelToSystem("Lakewood", 110);
-            hotelReservation.AddHotelToSystem("Bridgewood", 150);
-            hotelReservation.AddHotelToSystem("Ridgewood", 220);
+            hotelReservation.AddHotelToSystem("Lakewood", 110,90);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150,50);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220,150);
             Assert.AreEqual("Lakewood",hotelReservation.HotelList.First().HotelName);
         }
-        /// <summary>
-        /// Test case to give custom exception when given invalid date
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
     }
 }

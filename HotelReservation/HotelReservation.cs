@@ -16,11 +16,11 @@ namespace HotelReservation
         /// Method to add new hotel into the hotel reservation system
         /// </summary>
         /// <param name="hotelName"></param>
-        /// <param name="regularRates"></param>
+        /// <param name="weekdayRate"></param>
         
-        public void AddHotelToSystem(String hotelName, int regularRates)
+        public void AddHotelToSystem(String hotelName, int weekdayRate, int weekendRate)
         {
-            Hotel hotel = new Hotel(hotelName, regularRates);
+            Hotel hotel = new Hotel(hotelName, weekdayRate,weekendRate);
             availableHotels.Add(hotelName, hotel);
             HotelList.Add(hotel);
         }
@@ -44,9 +44,9 @@ namespace HotelReservation
                 {
                     TimeSpan difference = endDate - startDate;
                     int noOfDays = difference.Days;
-                    HotelList.Sort((hotel1, hotel2) => hotel1.RegularRate.CompareTo(hotel2.RegularRate));
+                    HotelList.Sort((hotel1, hotel2) => hotel1.WeekdayRate.CompareTo(hotel2.WeekdayRate));
                     Console.WriteLine("Cheapest Hotel for your stay : " + HotelList.First().HotelName +
-                        "Charges for the stay : " + HotelList.First().RegularRate * noOfDays);
+                        "Charges for the stay : " + HotelList.First().WeekdayRate * noOfDays);
                     return HotelList.First();
                 }
                 catch (FormatException)
