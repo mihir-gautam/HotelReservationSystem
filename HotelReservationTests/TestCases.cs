@@ -6,6 +6,10 @@ namespace HotelReservation
     [TestClass]
     public class TestCases
     {
+        /// <summary>
+        /// This test case will check if my AddHotelToSystem method is working or not. Passing one hotel entry into the 
+        /// new instance of hotelReservation will give count as 1.
+        /// </summary>
         [TestMethod]
         public void Given_HotelNameAndRate_ShouldReturn_HotelAdded()
         {
