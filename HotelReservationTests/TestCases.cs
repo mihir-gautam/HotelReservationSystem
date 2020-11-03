@@ -19,7 +19,8 @@ namespace HotelReservation
             string hotelName = "Lakewood";
             int weekdayRate = 110;
             int weekendRate = 90;
-            hotelReservation.AddHotelToSystem(hotelName, weekdayRate,weekendRate);
+            int rating = 3;
+            hotelReservation.AddHotelToSystem(hotelName, weekdayRate,weekendRate,rating);
             Assert.AreEqual(1, hotelReservation.availableHotels.Count);
         }
         /// <summary>
@@ -29,9 +30,9 @@ namespace HotelReservation
         public void Given_ValidDate_ShouldReturn_CheapestHotel()
         {
             HotelReservation hotelReservation = new HotelReservation();
-            hotelReservation.AddHotelToSystem("Lakewood", 110,90);
-            hotelReservation.AddHotelToSystem("Bridgewood", 150,50);
-            hotelReservation.AddHotelToSystem("Ridgewood", 220,150);
+            hotelReservation.AddHotelToSystem("Lakewood", 110,90,3);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150,50,4);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220,150,5);
             Assert.AreEqual("Lakewood",hotelReservation.HotelList.First().HotelName);
         }
         /// <summary>
@@ -41,9 +42,9 @@ namespace HotelReservation
         public void Given_ValidDate_WithBothWeekendAndWeekdays_ShouldReturn_HotelWithLowestCost()
         {
             HotelReservation hotelReservation = new HotelReservation();
-            hotelReservation.AddHotelToSystem("Lakewood", 110, 90);
-            hotelReservation.AddHotelToSystem("Bridgewood", 150, 50);
-            hotelReservation.AddHotelToSystem("Ridgewood", 220, 150);
+            hotelReservation.AddHotelToSystem("Lakewood", 110, 90, 3);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150, 50, 4);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220, 150, 5);
             DateTime startDate = Convert.ToDateTime("11-09-2020");
             DateTime endDate = Convert.ToDateTime("12-09-2020");
             Assert.AreEqual("Lakewood", hotelReservation.HotelList.First().HotelName);

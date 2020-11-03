@@ -8,9 +8,9 @@ namespace HotelReservation
         {
             Console.WriteLine("Welcome to Hotel Reservation Program ");
             HotelReservation hotelReservation = new HotelReservation();
-            hotelReservation.AddHotelToSystem("Lakewood", 110,90);
-            hotelReservation.AddHotelToSystem("Bridgewood", 150,50);
-            hotelReservation.AddHotelToSystem("Ridgewood", 220,150);
+            hotelReservation.AddHotelToSystem("Lakewood",110,90,3);
+            hotelReservation.AddHotelToSystem("Bridgewood",150,50,4);
+            hotelReservation.AddHotelToSystem("Ridgewood",220,150,3);
 
             Console.WriteLine("Enter the start date for your stay in dd-mm-yyyy format : ");
             DateTime startDate = Convert.ToDateTime(Console.ReadLine());
