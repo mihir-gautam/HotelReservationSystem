@@ -34,5 +34,20 @@ namespace HotelReservation
             hotelReservation.AddHotelToSystem("Ridgewood", 220,150);
             Assert.AreEqual("Lakewood",hotelReservation.HotelList.First().HotelName);
         }
+        /// <summary>
+        /// Test case to give lowest cost when giving one weekday and one weekend day
+        /// </summary>
+        [TestMethod]
+        public void Given_ValidDate_WithBothWeekendAndWeekdays_ShouldReturn_HotelWithLowestCost()
+        {
+            HotelReservation hotelReservation = new HotelReservation();
+            hotelReservation.AddHotelToSystem("Lakewood", 110, 90);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150, 50);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220, 150);
+            DateTime startDate = Convert.ToDateTime("11-09-2020");
+            DateTime endDate = Convert.ToDateTime("12-09-2020");
+            Assert.AreEqual("Lakewood", hotelReservation.HotelList.First().HotelName);
+            Assert.AreEqual(200, hotelReservation.TotalCost(hotelReservation.HotelList.First(), startDate, endDate));
+        }
     }
 }
