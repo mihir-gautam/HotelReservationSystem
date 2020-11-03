@@ -33,10 +33,5 @@ namespace HotelReservation
             hotelReservation.AddHotelToSystem("Ridgewood", 220);
             Assert.AreEqual("Lakewood",hotelReservation.HotelList.First().HotelName);
         }
-        /// <summary>
-        /// Test case to give custom exception when given invalid date
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
     }
 }
