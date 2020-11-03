@@ -46,8 +46,9 @@ namespace HotelReservation
                     TimeSpan difference = endDate - startDate;
                     int noOfDays = difference.Days;
                     HotelList.Sort((hotel1, hotel2) => hotel1.WeekdayRate.CompareTo(hotel2.WeekdayRate));
+                    Hotel cheapestHotel = HotelList.First();
                     Console.WriteLine("Cheapest Hotel for your stay : " + HotelList.First().HotelName +
-                        " Charges for the stay : " + TotalCost(HotelList.First(),startDate,endDate));
+                        " Charges for the stay : " + TotalCost(FindCheapestBestRatedHotel(startDate,endDate),startDate,endDate));
                     return HotelList.First();
                 }
                 catch (FormatException)
@@ -76,6 +77,45 @@ namespace HotelReservation
                     cost += weekdayRate;
             }
             return cost;
+        }
+        /// <summary>
+        /// method to find a list of cheapest hotels for given dates
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public List<Hotel> CheapestHotels(DateTime startDate, DateTime endDate)
+        {
+            HotelList.Sort((hotel1, hotel2) => (TotalCost(hotel1,startDate,endDate)).CompareTo(TotalCost(hotel1, startDate, endDate)));
+            List<Hotel> cheapestHotels = new List<Hotel>();
+            if ((HotelList[0] == HotelList[1]) && (HotelList[0]== HotelList.Last()))
+            {
+                cheapestHotels.Add(HotelList[0]);
+                cheapestHotels.Add(HotelList[1]);
+                cheapestHotels.Add(HotelList[2]);
+            }
+            if(HotelList[0] == HotelList[1])
+            {
+                cheapestHotels.Add(HotelList[0]);
+                cheapestHotels.Add(HotelList[1]);
+            }
+            else
+            {
+                cheapestHotels.Add(HotelList[0]);
+            }
+            return cheapestHotels;
+        }
+        /// <summary>
+        /// Method to find cheapest hotel having best rating on given dates
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public Hotel FindCheapestBestRatedHotel(DateTime startDate,DateTime endDate)
+        {
+            List<Hotel> cheapestHotels = CheapestHotels(startDate,endDate);
+            cheapestHotels.Sort((hotel1, hotel2) => hotel1.Rating.CompareTo(hotel2.Rating));
+            return cheapestHotels.Last();
         }
     }
 }
