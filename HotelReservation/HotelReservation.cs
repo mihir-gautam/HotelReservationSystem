@@ -19,9 +19,9 @@ namespace HotelReservation
         /// <param name="hotelName"></param>
         /// <param name="weekdayRate"></param>
         
-        public void AddHotelToSystem(String hotelName, int weekdayRate, int weekendRate, int rating)
+        public void AddHotelToSystem(String hotelName, int weekdayRate, int weekendRate, int rating, int rewardCustWeekdayRate, int rewardCustWeekendRate)
         {
-            Hotel hotel = new Hotel(hotelName, weekdayRate,weekendRate,rating);
+            Hotel hotel = new Hotel(hotelName, weekdayRate,weekendRate,rating,rewardCustWeekdayRate,rewardCustWeekendRate);
             availableHotels.Add(hotelName, hotel);
             HotelList.Add(hotel);
         }

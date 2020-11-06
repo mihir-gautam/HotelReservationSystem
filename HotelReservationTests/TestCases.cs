@@ -20,7 +20,9 @@ namespace HotelReservation
             int weekdayRate = 110;
             int weekendRate = 90;
             int rating = 3;
-            hotelReservation.AddHotelToSystem(hotelName, weekdayRate,weekendRate,rating);
+            int rewardCustWeekdayRate = 80;
+            int rewardCustWeekendRate = 80;
+            hotelReservation.AddHotelToSystem(hotelName,weekdayRate,weekendRate,rating,rewardCustWeekdayRate,rewardCustWeekendRate);
             Assert.AreEqual(1, hotelReservation.availableHotels.Count);
         }
         /// <summary>
@@ -30,9 +32,9 @@ namespace HotelReservation
         public void Given_ValidDate_ShouldReturn_CheapestHotel()
         {
             HotelReservation hotelReservation = new HotelReservation();
-            hotelReservation.AddHotelToSystem("Lakewood", 110,90,3);
-            hotelReservation.AddHotelToSystem("Bridgewood", 150,50,4);
-            hotelReservation.AddHotelToSystem("Ridgewood", 220,150,5);
+            hotelReservation.AddHotelToSystem("Lakewood", 110,90,3, 80, 80);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150,50,4, 110, 50);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220,150,5, 100, 40);
             Assert.AreEqual("Lakewood",hotelReservation.HotelList.First().HotelName);
         }
         /// <summary>
@@ -42,9 +44,9 @@ namespace HotelReservation
         public void Given_ValidDate_WithBothWeekendAndWeekdays_ShouldReturn_HotelWithLowestCost()
         {
             HotelReservation hotelReservation = new HotelReservation();
-            hotelReservation.AddHotelToSystem("Lakewood", 110, 90, 3);
-            hotelReservation.AddHotelToSystem("Bridgewood", 150, 50, 4);
-            hotelReservation.AddHotelToSystem("Ridgewood", 220, 150, 5);
+            hotelReservation.AddHotelToSystem("Lakewood", 110, 90, 3, 80, 80);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150, 50, 4, 110, 50);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220, 150, 5, 100, 40);
             DateTime startDate = Convert.ToDateTime("11-09-2020");
             DateTime endDate = Convert.ToDateTime("12-09-2020");
             Assert.AreEqual("Lakewood", hotelReservation.HotelList.First().HotelName);
@@ -57,9 +59,9 @@ namespace HotelReservation
         public void Given_ValidDate_WithBothWeekendAndWeekdays_ShouldReturn_BestRatedHotel()
         {
             HotelReservation hotelReservation = new HotelReservation();
-            hotelReservation.AddHotelToSystem("Lakewood", 110, 90, 3);
-            hotelReservation.AddHotelToSystem("Bridgewood", 150, 50, 4);
-            hotelReservation.AddHotelToSystem("Ridgewood", 220, 150, 5);
+            hotelReservation.AddHotelToSystem("Lakewood", 110, 90, 3, 80, 80);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150, 50, 4, 110, 50);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220, 150, 5, 100, 40);
             DateTime startDate = Convert.ToDateTime("11-09-2020");
             DateTime endDate = Convert.ToDateTime("12-09-2020");
             Assert.AreEqual("Ridgewood", hotelReservation.FindBestRatedHotel(startDate,endDate).HotelName);
