@@ -86,7 +86,7 @@ namespace HotelReservation
         /// <returns></returns>
         public List<Hotel> CheapestHotels(DateTime startDate, DateTime endDate)
         {
-            HotelList.Sort((hotel1, hotel2) => (TotalCost(hotel1,startDate,endDate)).CompareTo(TotalCost(hotel1, startDate, endDate)));
+            HotelList.Sort((hotel1, hotel2) => (TotalCost(hotel1,startDate,endDate)).CompareTo(TotalCost(hotel2, startDate, endDate)));
             List<Hotel> cheapestHotels = new List<Hotel>();
             if ((HotelList[0] == HotelList[1]) && (HotelList[0]== HotelList.Last()))
             {
