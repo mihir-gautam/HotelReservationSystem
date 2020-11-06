@@ -17,7 +17,8 @@ namespace HotelReservation
             Console.WriteLine("Enter the end date for your stay in dd-mm-yyyy format : ");
             DateTime endDate = Convert.ToDateTime(Console.ReadLine());
             hotelReservation.FindCheapestHotel(startDate, endDate);
-            hotelReservation.FindBestRatedHotel(startDate, endDate); 
+            hotelReservation.FindBestRatedHotel(startDate, endDate);
+            hotelReservation.CheapestBestRatedHotelPriceForRewardCust(startDate, endDate);
         }
     }
 }
