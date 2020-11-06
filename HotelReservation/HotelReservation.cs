@@ -78,6 +78,20 @@ namespace HotelReservation
             }
             return cost;
         }
+        public int TotalCostForRewardCustomer(Hotel hotel, DateTime startDate, DateTime endDate)
+        {
+            int cost = 0;
+            int rewardCustWeekdayRate = hotel.RewardCustWeekdayRate;
+            int rewardCustWeekendRate = hotel.RewardCustWeekendRate;
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                if (date.DayOfWeek == DayOfWeek.Sunday || date.DayOfWeek == DayOfWeek.Saturday)
+                    cost += rewardCustWeekendRate;
+                else
+                    cost += rewardCustWeekdayRate;
+            }
+            return cost;
+        }
         /// <summary>
         /// method to find a list of cheapest hotels for given dates
         /// </summary>
@@ -86,7 +100,28 @@ namespace HotelReservation
         /// <returns></returns>
         public List<Hotel> CheapestHotels(DateTime startDate, DateTime endDate)
         {
-            HotelList.Sort((hotel1, hotel2) => (TotalCost(hotel1, startDate, endDate)).CompareTo(TotalCost(hotel1, startDate, endDate)));
+            HotelList.Sort((hotel1, hotel2) => (TotalCost(hotel1, startDate, endDate)).CompareTo(TotalCost(hotel2, startDate, endDate)));
+            List<Hotel> cheapestHotels = new List<Hotel>();
+            if ((HotelList[0] == HotelList[1]) && (HotelList[0] == HotelList.Last()))
+            {
+                cheapestHotels.Add(HotelList[0]);
+                cheapestHotels.Add(HotelList[1]);
+                cheapestHotels.Add(HotelList[2]);
+            }
+            if (HotelList[0] == HotelList[1])
+            {
+                cheapestHotels.Add(HotelList[0]);
+                cheapestHotels.Add(HotelList[1]);
+            }
+            else
+            {
+                cheapestHotels.Add(HotelList[0]);
+            }
+            return cheapestHotels;
+        }
+        public List<Hotel> CheapestHotelsForRewardCustomer(DateTime startDate, DateTime endDate)
+        {
+            HotelList.Sort((hotel1, hotel2) => (TotalCostForRewardCustomer(hotel1, startDate, endDate)).CompareTo(TotalCostForRewardCustomer(hotel2, startDate, endDate)));
             List<Hotel> cheapestHotels = new List<Hotel>();
             if ((HotelList[0] == HotelList[1]) && (HotelList[0] == HotelList.Last()))
             {
@@ -138,10 +173,10 @@ namespace HotelReservation
         /// <returns></returns>
         public double CheapestBestRatedHotelPriceForRewardCust(DateTime startDate, DateTime endDate)
         {
-            List<Hotel> cheapestHotels = CheapestHotels(startDate, endDate);
+            List<Hotel> cheapestHotels = CheapestHotelsForRewardCustomer(startDate, endDate);
             cheapestHotels.Sort((hotel1, hotel2) => hotel1.Rating.CompareTo(hotel2.Rating));
             int cost = 0;
-            Hotel cheapestBestRatedHotel = cheapestHotels.First();
+            Hotel cheapestBestRatedHotel = cheapestHotels.Last();
             int rewardCustWeekdayRate = cheapestBestRatedHotel.RewardCustWeekdayRate;
             int rewardCustWeekendRate = cheapestBestRatedHotel.RewardCustWeekendRate;
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
@@ -151,7 +186,7 @@ namespace HotelReservation
                 else
                     cost += rewardCustWeekdayRate;
             }
-            Console.WriteLine("Cheapest best rated hotel for reward customers : "+cost);
+            Console.WriteLine("Cheapest best rated hotel for reward customers : "+cheapestHotels.Last().HotelName+ "\nRating: "+ cheapestHotels.Last().Rating+ "\nCost: "+cost);
             return cost;
         }
     }

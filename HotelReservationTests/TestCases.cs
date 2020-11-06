@@ -79,7 +79,7 @@ namespace HotelReservation
             hotelReservation.AddHotelToSystem("Ridgewood", 220, 150, 5, 100, 40);
             DateTime startDate = Convert.ToDateTime("11-09-2020");
             DateTime endDate = Convert.ToDateTime("12-09-2020");
-            Assert.AreEqual(160, hotelReservation.CheapestBestRatedHotelPriceForRewardCust(startDate, endDate));
+            Assert.AreEqual(140, hotelReservation.CheapestBestRatedHotelPriceForRewardCust(startDate, endDate));
         }
     }
 }
