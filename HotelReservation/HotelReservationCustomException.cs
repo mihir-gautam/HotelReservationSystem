@@ -13,6 +13,7 @@ namespace HotelReservation
         {
             INVALID_DATE,
             INVALID_DATE_FORMAT,
+            INVALID_CHOICE
         }
         public ExceptionType type;
 
