@@ -117,5 +117,18 @@ namespace HotelReservation
             cheapestHotels.Sort((hotel1, hotel2) => hotel1.Rating.CompareTo(hotel2.Rating));
             return cheapestHotels.Last();
         }
+        /// <summary>
+        /// Ability to view the best rated hotel on given dates.
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public Hotel FindBestRatedHotel(DateTime startDate, DateTime endDate)
+        {
+            HotelList.Sort((hotel1,hotel2)=> hotel1.Rating.CompareTo(hotel2.Rating));
+            Hotel bestRatedHotel = HotelList.Last();
+            Console.WriteLine("Best Rated hotel: " + bestRatedHotel.HotelName + " Total Cost : "+ TotalCost(bestRatedHotel,startDate,endDate));
+            return bestRatedHotel;
+        }
     }
 }

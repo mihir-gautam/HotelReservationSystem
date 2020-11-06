@@ -50,5 +50,20 @@ namespace HotelReservation
             Assert.AreEqual("Lakewood", hotelReservation.HotelList.First().HotelName);
             Assert.AreEqual(200, hotelReservation.TotalCost(hotelReservation.HotelList.First(), startDate, endDate));
         }
+        /// <summary>
+        /// Test Method pass when best rated hotel is returned for given dates
+        /// </summary>
+        [TestMethod]
+        public void Given_ValidDate_WithBothWeekendAndWeekdays_ShouldReturn_BestRatedHotel()
+        {
+            HotelReservation hotelReservation = new HotelReservation();
+            hotelReservation.AddHotelToSystem("Lakewood", 110, 90, 3);
+            hotelReservation.AddHotelToSystem("Bridgewood", 150, 50, 4);
+            hotelReservation.AddHotelToSystem("Ridgewood", 220, 150, 5);
+            DateTime startDate = Convert.ToDateTime("11-09-2020");
+            DateTime endDate = Convert.ToDateTime("12-09-2020");
+            Assert.AreEqual("Ridgewood", hotelReservation.FindBestRatedHotel(startDate,endDate).HotelName);
+            Assert.AreEqual(370, hotelReservation.TotalCost(hotelReservation.FindBestRatedHotel(startDate, endDate), startDate, endDate));
+        }
     }
 }
